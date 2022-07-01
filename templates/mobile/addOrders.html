@@ -1,0 +1,113 @@
+{% extends 'mobile/base.html' %}
+{% load static %}
+
+{% block mainbody %}
+    <!--头部-->
+    <header>
+        <div class="header">
+            <a href="{% url 'mobile_index' %}">Back</a>
+            <h1>Submit Order </h1>
+           
+        </div>
+    </header>
+
+    <!--内容区-->
+    <article class="main-container add-product">
+        <!--产品-->
+        <div class="list-content cartlist order-Pro">
+            <div class="LayerHeader line">
+                <button><a href="{% url 'mobile_cart_clear' %}" class="Del" style="width:60px;float:right;margin-right:20px;"><i class="icon-delete"></i>empty</a></button>
+                <!--button class="Del" onclick="doCartClear()"><i class="icon-delete"></i>Empty</button-->     
+            </div>
+            <h2><p>ShoppingCart detail</p></ShoppingCart></h2>
+            <ul>
+                {% for vo in request.session.cartlist.values %}
+                <li class="line">
+                    <a href="#"><div class="pro-img"><img src="{% static 'uploads/product/' %}{{vo.cover_pic}}" alt=""></div></a>
+                    <div class="pro-con"><h3>{{vo.name}}</h3><b><span>${{ vo.price }}</span></b></div>
+                    <div class="D-BuyNum">
+                        <button><a href="{% url 'mobile_cart_change' %}?pid={{vo.id}}&num={{vo.num|add:-1}}" class="Del" style="width:60px;float:right;margin-right:20px;"><b>-</b></a></button>
+                        {{ vo.num }}
+                        <button><a href="{% url 'mobile_cart_change' %}?pid={{vo.id}}&num={{vo.num|add:1}}" class="Del" style="width:60px;float:right;margin-right:20px;"><b>+</b></a></button>
+                    </div>
+                </li>
+                {% endfor %}
+               
+            </ul>
+           
+        </div>
+
+
+
+        <!-- payment Detail-->
+        <div class="order-Delivery line" id="orderPays">
+            <h3><p>Payment Detail </p></h3>
+            <ol class="FilterContentList">
+            </ol>
+            <form class="form-horizontal" action="{% url 'mobile_doaddorders' %}" method = "POST">
+                {% csrf_token %}
+                <div class="box-body">
+                
+                  <div class="form-group">
+                    &nbsp;<label for="inputEmail3" class="col-sm-2 control-label">Mobile:</label>
+  
+                    <div class="col-sm-4">
+                        &nbsp; <input type="text" name="mobile" class="form-control" >
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    &nbsp;  <label for="inputEmail3" class="col-sm-2 control-label">Email:</label>
+    
+                        <div class="col-sm-4">
+                    &nbsp;  <input type="text" name="email" class="form-control" >
+                        </div>
+                   </div>
+                   <div class="form-group">
+                    &nbsp;&nbsp;<label for="inputEmail3" class="col-sm-2 control-label">promoCode:</label>
+ 
+                     <div class="col-sm-4">
+                        &nbsp;&nbsp;<input type="text" name="promoCode" class="form-control" >
+                     </div>
+                </div>
+
+                </div>
+
+        <br><br>
+
+    </article>
+
+    <!--底部栏目-->
+    <footer>
+        <div class="button"><button type="submit" class="btn btn-primary">submit</button></div>
+        <h4>Total：${{ request.session.total_money }}</h4>
+    </footer>
+{% endblock %}
+
+{% block myjavascript %}
+<script type="text/javascript">
+    //支付方式上的单选按钮点击效果
+    $("ul.line li").click(function(){
+        $("ul.line li").removeClass("select");
+        $(this).addClass("select");
+    });
+
+    
+
+    //执行订单提交操作函数
+  /*  function doSubmit(){
+        bid = $("ul.line li.select").attr("bank"); //获取支付方式
+        window.location.href="{% url 'mobile_doaddorders' %}?bank="+bid;
+    } */
+</script>
+{% endblock %}
+
+
+<style type="text/css">
+    .mydate {
+        border: 2px solid black;
+    }
+    .button{
+        background-color: white;
+        border: 2px solid black;
+    }
+    </style>

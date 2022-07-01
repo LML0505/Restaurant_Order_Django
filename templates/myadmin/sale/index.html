@@ -1,0 +1,114 @@
+{% extends "myadmin/base.html" %}
+
+{% block main_body %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Sales Management
+        <small>Restaurant Management</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> HomePage</a></li>
+        <li class="active">Sale </li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content container-fluid">
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title"><i class="fa fa-calendar"></i> Sales report </h3>
+
+              
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
+                <tr>
+                  <th>Report</th>
+                  <th>Operation</th>
+                </tr>
+              
+                <tr>
+                  <td>daily report for average spend per visit</td>
+                  <td width="20%">
+                    <a href="{% url 'myadmin_spend_day' %}" class="btn btn-success btn-xs">
+                      <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Generate </a>
+                  </td>
+                </tr>
+                <tr>
+                    <td>weekly report for average spend per visit</td>
+                    <td width="20%">
+                      <a href="{% url 'myadmin_spend_week' %}" class="btn btn-success btn-xs">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Generate </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Monthly report for average spend per visit</td>
+                    <td width="20%">
+                      <a href="{% url 'myadmin_spend_month' %}" class="btn btn-success btn-xs">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Generate </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>daily report for frequency rate of visits</td>
+                    <td width="20%">
+                      <a href="{% url 'myadmin_frequency_day' %}" class="btn btn-success btn-xs">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Generate </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>weekly report for frequency rate of visits</td>
+                    <td width="20%">
+                      <a href="{% url 'myadmin_frequency_week' %}" class="btn btn-success btn-xs">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Generate </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>monthly report for frequency rate of visits</td>
+                    <td width="20%">
+                      <a href="{% url 'myadmin_frequency_month' %}" class="btn btn-success btn-xs">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Generate </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>daily report for dish and drink perference</td>
+                    <td width="20%">
+                      <a href="{% url 'myadmin_product_day' %}" class="btn btn-success btn-xs">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Generate </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>weekly report for dish and drink perference</td>
+                    <td width="20%">
+                      <a href="{% url 'myadmin_product_week' %}" class="btn btn-success btn-xs">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Generate </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>monthly report for dish and drink perference</td>
+                    <td width="20%">
+                      <a href="{% url 'myadmin_product_month' %}" class="btn btn-success btn-xs">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Generate </a>
+                    </td>
+                  </tr>
+                
+              </table>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+    
+              
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+      </div>
+
+    </section>
+    <!-- /.content -->
+   
+{% endblock %}

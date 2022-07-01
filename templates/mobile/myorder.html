@@ -1,0 +1,114 @@
+{% extends 'mobile/base.html' %}
+{% load static %}
+
+{% block mainbody %}
+    <!--头部-->
+    <header>
+        <div class="header">
+            <a href="{% url 'mobile_index' %}">Back</a>
+            <h1>Make Payment </h1>
+           
+        </div>
+    </header>
+
+    <!--内容区-->
+    <article class="main-container add-product">
+        <!--产品-->
+        <div class="list-content cartlist order-Pro">
+            <div class="LayerHeader line">
+              
+                <!--button class="Del" onclick="doCartClear()"><i class="icon-delete"></i>Empty</button-->     
+            </div>
+            <h2><p>Order detail</p></ShoppingCart></h2>
+            <ul>
+                {% for vo in request.session.cartlist.values %}
+                <li class="line">
+                    <a href="#"><div class="pro-img"><img src="{% static 'uploads/product/' %}{{vo.cover_pic}}" alt=""></div></a>
+                    <div class="pro-con"><h3>{{vo.name}}</h3><b><span>${{ vo.price }}</span></b></div>
+                    <div class="D-BuyNum">
+                        
+                        X{{ vo.num }}
+                       
+                    </div>
+                </li>
+                {% endfor %}
+               
+            </ul>
+           
+        </div>
+
+
+
+        <!-- payment Detail-->
+        <div class="order-Delivery line" id="orderPays">
+            <h3><p>Payment Detail </p></h3>
+            <ol class="FilterContentList">
+            </ol>
+            <form class="form-horizontal" action="{% url 'mobile_payment' order.id %}" method = "POST">
+                {% csrf_token %}
+                <div class="box-body">
+                  <div class="form-group">
+                    &nbsp;<label for="inputEmail3" class="col-sm-2 control-label">creditcard:</label>
+                
+                    <div class="col-sm-4">
+                    &nbsp; <input type="text" name="creditCard" class="form-control" value="">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    &nbsp;<label for="inputEmail3" class="col-sm-2 control-label">Mobile:</label>
+  
+                    <div class="col-sm-4">
+                    &nbsp; <input type="text" name="mobile" readonly value="{{cus.mobile}}" class="form-control" >
+                      </div>
+                    </div>
+                  
+                  <div class="form-group">
+                    &nbsp;  <label for="inputEmail3" class="col-sm-2 control-label">Email:</label>
+    
+                        <div class="col-sm-4">
+                    &nbsp;  <input type="text" name="email" readonly value="{{cus.email}}" class="form-control" >
+                        </div>
+                   </div>
+                
+
+                </div>
+
+        <br><br>
+
+    </article>
+
+    <!--底部栏目-->
+    <footer>
+        <div class="button"><button type="submit" class="btn btn-primary">payment</button></div>
+        <h4>Total：${{ order.money }}</h4>
+    </footer>
+{% endblock %}
+
+{% block myjavascript %}
+<script type="text/javascript">
+    //支付方式上的单选按钮点击效果
+  /*  $("ul.line li").click(function(){
+        $("ul.line li").removeClass("select");
+        $(this).addClass("select");
+    });*/
+
+    
+
+    //执行订单提交操作函数
+  /*  function doSubmit(){
+        bid = $("ul.line li.select").attr("bank"); //获取支付方式
+        window.location.href="{% url 'mobile_doaddorders' %}?bank="+bid;
+    } */
+</script>
+{% endblock %}
+
+
+<style type="text/css">
+    .mydate {
+        border: 2px solid black;
+    }
+    .button{
+        background-color: white;
+        border: 2px solid black;
+    }
+    </style>
